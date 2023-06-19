@@ -19,12 +19,19 @@ def read_qr_code():
     # Extract and print the cryptocurrency address from the QR code
     if codes:
         qr_data = codes[0].data.decode('utf-8')
-        print(f"QR Code Data: {qr_data}")  # Debugging statement
         if qr_data.startswith('D'):
             dogecoin_address = qr_data
             print(f"Dogecoin Address: {dogecoin_address}")
+        if qr_data.startswith(('1', '3', 'bc1')):
+
+            bitcoin_address = qr_data
+            print(f"bitcoin Address: {bitcoin_address}")
+        if qr_data.startswith(('l', 'm')):
+            
+            litecoin_address = qr_data
+            print(f"litecoin Address: {litecoin_address}")
         else:
-            print("QR code does not contain a Dogecoin address.")
+            print("QR code does not contain a bitcoin address.")
     else:
         print("No QR code found.")
 
