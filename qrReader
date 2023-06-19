@@ -1,0 +1,31 @@
+import picamera
+from pyzbar import pyzbar
+from PIL import Image
+
+def read_qr_code():
+    # Initialize the Pi camera
+    with picamera.PiCamera() as camera:
+        # Capture a frame
+        camera.start_preview()
+        camera.capture('qr_code.jpg')
+        camera.stop_preview()
+
+    # Open the captured image
+    image = Image.open('qr_code.jpg')
+
+    # Scan the QR code from the image
+    codes = pyzbar.decode(image)
+
+    # Extract and print the cryptocurrency address from the QR code
+    if codes:
+        qr_data = codes[0].data.decode('utf-8')
+        print(f"QR Code Data: {qr_data}")  # Debugging statement
+        if qr_data.startswith('D'):
+            dogecoin_address = qr_data
+            print(f"Dogecoin Address: {dogecoin_address}")
+        else:
+            print("QR code does not contain a Dogecoin address.")
+    else:
+        print("No QR code found.")
+
+read_qr_code()
