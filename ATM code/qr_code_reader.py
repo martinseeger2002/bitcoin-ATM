@@ -1,8 +1,12 @@
 import picamera
-from pyzbar import pyzbar
 from PIL import Image
+from pyzbar import pyzbar
+
+
 
 def read_qr_code():
+    qr_data = None  # Initialize qr_data variable
+    
     # Initialize the Pi camera
     with picamera.PiCamera() as camera:
         # Capture a frame
@@ -35,6 +39,7 @@ def read_qr_code():
 
     # Save QR code result to a txt file
     with open('qr_code_result.txt', 'w') as file:
-        file.write(qr_data)
-
-read_qr_code()
+        if qr_data:
+            file.write(qr_data)
+        else:
+            file.write("No QR code found.")
