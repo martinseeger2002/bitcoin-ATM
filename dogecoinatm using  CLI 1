@@ -185,8 +185,11 @@ class PulseCounterGUI:
         self.warning_label = tk.Label(self.root, text="Warning:\nDo not insert more cash than the Available Doge Balance.\n\nCheck to ensure the Dogecoin address is correct.",font=("Arial", 16), fg="red")
         self.warning_label.pack(pady=20)
         
-        self.qr_code_label = tk.Label(self.root, text="Dogecoin Address:", font=("Arial", 16))
+        self.qr_code_label = tk.Label(self.root, text="Dogecoin Address:", font=("Arial", 16), fg="black")
         self.qr_code_label.pack(pady=20)
+        
+        self.final_count_label = tk.Label(self.root, text="Total Dollars Inserted: 0", font=("Arial", 16))
+        self.final_count_label.pack(pady=20)
         
         self.doge_to_send_label = tk.Label(self.root, text="Doge to Send: 0", font=("Arial", 16))
         self.doge_to_send_label.pack(pady=20)
@@ -217,9 +220,9 @@ class PulseCounterGUI:
         qr_data = read_qr_code()
         
         if qr_data:
-            self.qr_code_label.config(text=f"Doge Address: {qr_data}")
+            self.qr_code_label.config(text=f"Doge Address: {qr_data}",font=("Arial", 16), fg="black" )
         else:
-            self.qr_code_label.config(text="No QR code found.")
+            self.qr_code_label.config(text="No QR code found.",font=("Arial", 16), fg="red")
     
     def start_count(self):
         global counting, stop_flag
